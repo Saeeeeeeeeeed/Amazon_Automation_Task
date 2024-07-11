@@ -3,6 +3,8 @@ package com.test.utils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import pages.constants.GeneralConstants;
+import pages.constants.GeneralPaths;
 import utilities.PropertiesReader;
 
 import java.io.FileOutputStream;
@@ -19,7 +21,7 @@ public class helper {
 
     public static void CaptureScreenshot(WebDriver driver, String ScreenShotName)
     {
-        Path dest = Paths.get(System.getProperty("user.dir")+generalConfigurationProperties.getProperty("screenshotPath"), ScreenShotName+".png");
+        Path dest = Paths.get(System.getProperty(GeneralPaths.CONFIGURATION_DIR_PATH)+generalConfigurationProperties.getProperty(GeneralPaths.SCREEN_SHOTS_DIRECTORY), ScreenShotName+".png");
 
         try {
             Files.createDirectories(dest.getParent());

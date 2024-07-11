@@ -3,6 +3,7 @@ package com.test.base;
 import com.paulhammant.ngwebdriver.NgWebDriver;
 import com.test.utils.helper;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import listeners.ExtentManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
@@ -13,12 +14,13 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
-import pages.base.LoginPage;
 import utilities.PropertiesReader;
 
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Properties;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class TestBase {
     public static WebDriver driver;
@@ -29,15 +31,17 @@ public class TestBase {
 
     private final PropertiesReader propHandler = new PropertiesReader();
     public Properties generalConfigurationProps = propHandler.loadPropertiesFromFile("generalConfig.properties");
+    private final ExecutorService service = Executors.newFixedThreadPool(5);
 
-    String username = generalConfigurationProps.getProperty("username");
-    String password = generalConfigurationProps.getProperty("password");
-    LoginPage loginPage;
+    @BeforeSuite
+    public void beforeSuite() {
+        ExtentManager.setExtent();
+    }
 
 
     @Parameters({"url"})
     @BeforeTest
-    public void setUp (@Optional("https://www.saucedemo.com/")String url) {
+    public void setUp (@Optional("https://www.amazon.eg/")String url) {
         try {
             log.info("Initialize Selenium WebDriver before tests' Class");
             WebDriverManager.chromedriver().setup();
@@ -48,9 +52,6 @@ public class TestBase {
             driver.get(url);
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
             log.info("Selenium web driver was initialized successfully");
-            loginPage = new LoginPage(driver);
-            loginPage.login(username, password);
-            log.info("user logged successfully");
         } catch (Exception e) {
             log.error("Error occurred while initializing selenium web driver", e);
         }
@@ -64,8 +65,8 @@ public class TestBase {
         options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
         options.addArguments("window-size=1024,768");
         //options.addArguments("--headless=new");
-        //options.addArguments("--no-sandbox");
-        //options.addArguments("--start-maximized");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--start-maximized");
         return options;
     }
 
@@ -81,6 +82,12 @@ public class TestBase {
             log.info("Taking Screenshot...");
             helper.CaptureScreenshot(driver, result.getName());
         }
+    }
+
+    @AfterSuite
+    public void afterSuite() {
+        service.shutdown();
+        ExtentManager.endReport();
     }
     }
 
