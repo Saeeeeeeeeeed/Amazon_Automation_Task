@@ -33,6 +33,7 @@ report used is extent report, you will find this report under test-output/Extent
 # How to find screenshot for failure ?
 you will find screenshots in directory with name screenshots in resources under test .
 # Note :
-please be noted if you need to run test in headless mode uncomment the headless option line in chrome option method in TestBase .
+- please be noted if you need to run test in headless mode uncomment the headless option line in chrome option method in TestBase .
+- also be noted report is generated for test when it's run per suite . 
 
 
