@@ -6,7 +6,7 @@
     </listeners>
     <test name="Test">
         <classes>
-            <class name="com.test.amazonTest.LoginTest">
+            <class name="com.test.amazonTest.HomeTest">
 <!--                <methods>-->
 <!--                    <include name="VerifyThatYouCanNotSeeYourLists"/>-->
 <!--                </methods>-->

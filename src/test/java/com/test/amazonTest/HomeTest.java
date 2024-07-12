@@ -11,7 +11,7 @@ import utilities.PropertiesReader;
 
 import java.util.Properties;
 
-public class LoginTest extends TestBase {
+public class HomeTest extends TestBase {
 
     HomePage homePage;
 
