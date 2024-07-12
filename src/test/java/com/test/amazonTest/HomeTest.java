@@ -26,6 +26,9 @@ public class HomeTest extends TestBase {
         homePage.navigateToAmazonHomePage();
     }
 
+
+    //////////////////////////////// SCENARIO #1 /////////////////////////////////
+
     @Test(description = "#1",priority = 1)
     public void VerifyThatUserCanNotLogInWithValidButNotRegisteredEmail() {
         try{
@@ -38,6 +41,8 @@ public class HomeTest extends TestBase {
             throw new SkipException(GeneralConstants.SKIPPED_MESSAGE, e);
         }
     }
+
+    //////////////////////////////// SCENARIO #2 /////////////////////////////////
 
     @Test(description = "#2",priority = 2)
     public void VerifyThatItemsAreAddedToCartCorrectly() throws Exception {
@@ -63,6 +68,8 @@ public class HomeTest extends TestBase {
             throw new SkipException(GeneralConstants.SKIPPED_MESSAGE, e);
         }
     }
+
+    //////////////////////////////// SCENARIO #3 /////////////////////////////////
 
     @Test(description = "#3",priority = 3)
     public void VerifyThatYouCanNotSeeYourOrders() throws Exception {
