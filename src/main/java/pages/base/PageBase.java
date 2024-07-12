@@ -1,6 +1,7 @@
 package pages.base;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import pages.constants.GeneralConstants;
 import pages.constants.GeneralPaths;
@@ -17,6 +18,7 @@ public class PageBase {
     JavascriptExecutor jse;
 
     protected Waits waits;
+    Actions actions;
 
     public static PropertiesReader propertiesReader = new PropertiesReader();
     public static final Properties pathsProperties = propertiesReader.loadPropertiesFromFile(GeneralConstants.PATHS_CONFIGURATION_FILE_NAME);
@@ -359,6 +361,16 @@ public class PageBase {
 
     public void scrollEndOfPageUsingKeys(By locator) {
         driver.findElement(locator).sendKeys(Keys.END);
+    }
+
+    public void hover(By locator) {
+        waits.waitForVisibility(locator);
+        actions = new Actions(driver);
+        actions.moveToElement(findElement(locator)).perform();
+    }
+
+    public void navigateTo(String URL) {
+        driver.get(URL);
     }
 
 }

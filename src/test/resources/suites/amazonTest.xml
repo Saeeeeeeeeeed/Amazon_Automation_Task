@@ -1,13 +1,16 @@
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Regression Test">
     <parameter name="url" value="https://www.amazon.eg/" />
     <listeners>
-        <listener class-name="listeners.ExtentReportListener"/>
+        <listener class-name="com.test.listeners.ExtentReportListener"/>
     </listeners>
     <test name="Test">
-
         <classes>
-            <class name="com.test.amazonTest.LoginTest"/>
+            <class name="com.test.amazonTest.LoginTest">
+<!--                <methods>-->
+<!--                    <include name="VerifyThatYouCanNotSeeYourLists"/>-->
+<!--                </methods>-->
+            </class>
         </classes>
     </test>
 </suite>

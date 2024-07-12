@@ -1,4 +1,4 @@
-package listeners;
+package com.test.listeners;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -17,7 +17,7 @@ public class ExtentManager {
         public static ExtentReports extent;
         public static ExtentTest test;
         public static final String extentXmlPath = System.getProperty(GeneralConstants.USER_DIR) + pathsProperties.getProperty(GeneralPaths.EXTENT_CONFIG_XML);
-        public static final String extentReportDirectory = System.getProperty(GeneralConstants.USER_DIR)+pathsProperties.getProperty(GeneralPaths.EXTENT_REPORT_DIRECTORY+GeneralConstants.EXTENT_REPORT_NAME);
+        public static final String extentReportDirectory = System.getProperty(GeneralConstants.USER_DIR)+pathsProperties.getProperty(GeneralPaths.EXTENT_REPORT_DIRECTORY)+GeneralConstants.EXTENT_REPORT_NAME;
 
         public static void setExtent() {
             htmlReporter = new ExtentHtmlReporter(extentReportDirectory) {
@@ -30,6 +30,9 @@ public class ExtentManager {
 
             extent = new ExtentReports();
             extent.attachReporter(htmlReporter);
+
+            System.out.println("Extent XML Path: " + extentXmlPath);
+            System.out.println("Extent Report Directory: " + extentReportDirectory);
         }
 
         public static void endReport() {

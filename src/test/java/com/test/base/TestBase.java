@@ -3,7 +3,7 @@ package com.test.base;
 import com.paulhammant.ngwebdriver.NgWebDriver;
 import com.test.utils.helper;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import listeners.ExtentManager;
+import com.test.listeners.ExtentManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
@@ -80,7 +80,7 @@ public class TestBase {
     public void screenshotFailure(ITestResult result) {
         if (result.getStatus() == ITestResult.SKIP || result.getStatus() == ITestResult.FAILURE) {
             log.info("Taking Screenshot...");
-            helper.CaptureScreenshot(driver, result.getName());
+            helper.captureScreenshot(driver, result.getName());
         }
     }
 
